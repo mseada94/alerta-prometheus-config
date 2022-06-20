@@ -65,10 +65,13 @@ services:
     depends_on:
       - db
     environment:
-      - DEBUG=1  # remove this line to turn DEBUG off
+      # - DEBUG=1  # remove this line to turn DEBUG off
       - DATABASE_URL=mongodb://db:27017/monitoring
-      # - AUTH_REQUIRED=True
-      - ADMIN_USERS=admin@alerta.io
+      - AUTH_REQUIRED=True
+      - ADMIN_USERS=admin@alerta.io,devops@alerta.io
+      - ADMIN_PASSWORD=alerta # default is "alerta"
+      - ADMIN_KEY=demo-key  # assigned to first user in ADMIN_USERS
+      - ADMIN_KEY_MAXAGE=500
       - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
       - ALERTMANAGER_API_URL=http://alertmanager:9093
     restart: always
